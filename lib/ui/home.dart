@@ -131,12 +131,14 @@ class _HomePageState extends State<HomePage> {
                                       child: Center(
                                         child: Icon(
                                           Icons.remove,
-                                          color: Colors.white,
+                                          color: Colors.blue,
                                           size: 16,
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          color: Colors.red,
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: Colors.blue),
                                           borderRadius:
                                               BorderRadius.circular(4)),
                                     ),

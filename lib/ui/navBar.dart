@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weez/ui/history_transaction.dart';
 
 class NavBar extends StatelessWidget {
   @override
@@ -9,7 +10,7 @@ class NavBar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('Oflutter.com'),
+            accountName: Text('Yonatan'),
             accountEmail: Text('example@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
@@ -27,39 +28,53 @@ class NavBar extends StatelessWidget {
             // ),
           ),
           ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text('Favorites'),
+            leading: Icon(
+              Icons.computer_rounded,
+              color: Colors.blue,
+            ),
+            title: Text('Cashier'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Friends'),
-            onTap: () => null,
+            leading: Icon(
+              Icons.history,
+              color: Colors.blue,
+            ),
+            title: Text('History Transaction'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HistoryTransactionPage()),
+              );
+            },
           ),
           ListTile(
-            leading: Icon(Icons.share),
-            title: Text('Share'),
+            leading: Icon(
+              Icons.store_mall_directory_rounded,
+              color: Colors.blue,
+            ),
+            title: Text('Manage Store'),
             onTap: () => null,
           ),
-          ListTile(
-            leading: Icon(Icons.notifications),
-            title: Text('Request'),
-          ),
+          // Divider(),
+          // ListTile(
+          //   leading: Icon(Icons.settings),
+          //   title: Text('Settings'),
+          //   onTap: () => null,
+          // ),
+          // ListTile(
+          //   leading: Icon(Icons.description),
+          //   title: Text('Policies'),
+          //   onTap: () => null,
+          // ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () => null,
-          ),
-          ListTile(
-            leading: Icon(Icons.description),
-            title: Text('Policies'),
-            onTap: () => null,
-          ),
-          Divider(),
-          ListTile(
-            title: Text('Exit'),
-            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+            leading: Icon(
+              Icons.exit_to_app,
+              color: Colors.blue,
+            ),
             onTap: () => null,
           ),
         ],

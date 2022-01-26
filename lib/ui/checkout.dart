@@ -77,201 +77,207 @@ class _CheckoutPageState extends State<CheckoutPage> {
               fontWeight: FontWeight.bold, fontSize: 24, color: Colors.blue),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: fullWidth,
-              child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    width: fullWidth,
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                'Order List',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.black),
+                              ),
+                            ),
+                            Container(
+                              height: 200,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: myProducts.length,
+                                itemBuilder: (BuildContext ctxt, int index) {
+                                  return checkoutItem(index);
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Total Bill : ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22,
+                                      color: Colors.blue),
+                                ),
+                                Text(
+                                  'Rp 45.000',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
+                                      color: Colors.blue),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )),
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          'Order List',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.black),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        child: ButtonWidget(
+                          label: 'Cash',
+                          color: isCash ? Colors.blue : Colors.grey[200],
+                          fontColor: isCash ? Colors.white : Colors.blue,
+                          onTap: () {
+                            setState(() {
+                              isCash = true;
+                            });
+                          },
+                          width: (MediaQuery.of(context).size.width / 2) - 10,
+                          height: 50,
+                          icon: Icons.attach_money_rounded,
                         ),
                       ),
                       Container(
-                        height: 200,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: myProducts.length,
-                          itemBuilder: (BuildContext ctxt, int index) {
-                            return checkoutItem(index);
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        child: ButtonWidget(
+                          label: 'Non Cash',
+                          color: isCash ? Colors.grey[200] : Colors.blue,
+                          fontColor: isCash ? Colors.blue : Colors.white,
+                          onTap: () {
+                            setState(() {
+                              isCash = false;
+                            });
                           },
+                          width: (MediaQuery.of(context).size.width / 2) - 10,
+                          height: 50,
+                          icon: Icons.credit_card_rounded,
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Total Bill : ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
-                                color: Colors.blue),
-                          ),
-                          Text(
-                            'Rp 45.000',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
-                                color: Colors.blue),
-                          ),
-                        ],
                       ),
                     ],
-                  )),
-            ),
-            Divider(),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: ButtonWidget(
-                    label: 'Cash',
-                    color: isCash ? Colors.blue : Colors.grey[200],
-                    fontColor: isCash ? Colors.white : Colors.blue,
-                    onTap: () {
-                      setState(() {
-                        isCash = true;
-                      });
-                    },
-                    width: (MediaQuery.of(context).size.width / 2) - 10,
-                    height: 50,
-                    icon: Icons.attach_money_rounded,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: ButtonWidget(
-                    label: 'Non Cash',
-                    color: isCash ? Colors.grey[200] : Colors.blue,
-                    fontColor: isCash ? Colors.blue : Colors.white,
-                    onTap: () {
-                      setState(() {
-                        isCash = false;
-                      });
-                    },
-                    width: (MediaQuery.of(context).size.width / 2) - 10,
-                    height: 50,
-                    icon: Icons.credit_card_rounded,
-                  ),
-                ),
-              ],
-            ),
-            isCash
-                ? Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 40, 0, 10),
-                          child: Text(
-                            'Total Cash',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.blue),
+                  isCash
+                      ? Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 40, 0, 10),
+                                child: Text(
+                                  'Total Cash',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.blue),
+                                ),
+                              ),
+                              TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                    fillColor: Colors.grey[300],
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    hintText: 'Enter total cash'),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(
+                          padding: EdgeInsets.only(top: 20),
+                          child: ToggleButtons(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 35.0, vertical: 20.0),
+                                child: Image.asset(
+                                  'assets/grab.png',
+                                  height: 60,
+                                  width: 60,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 35.0, vertical: 20.0),
+                                child: Image.asset(
+                                  'assets/gojek.png',
+                                  height: 60,
+                                  width: 60,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 35.0, vertical: 20.0),
+                                child: Image.asset(
+                                  'assets/shopee.png',
+                                  height: 60,
+                                  width: 60,
+                                ),
+                              ),
+                            ],
+                            onPressed: (int index) {
+                              setState(
+                                () {
+                                  for (int buttonIndex = 0;
+                                      buttonIndex < isSelected.length;
+                                      buttonIndex++) {
+                                    if (buttonIndex == index) {
+                                      isSelected[buttonIndex] =
+                                          !isSelected[buttonIndex];
+                                    } else {
+                                      isSelected[buttonIndex] = false;
+                                    }
+                                  }
+                                },
+                              );
+                            },
+                            isSelected: isSelected,
                           ),
                         ),
-                        TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                              fillColor: Colors.grey[300],
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              hintText: 'Enter total cash'),
-                        ),
-                      ],
-                    ),
-                  )
-                : Container(
-                    padding: EdgeInsets.only(top: 20),
-                    child: ToggleButtons(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 35.0, vertical: 20.0),
-                          child: Image.asset(
-                            'assets/grab.png',
-                            height: 60,
-                            width: 60,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 35.0, vertical: 20.0),
-                          child: Image.asset(
-                            'assets/gojek.png',
-                            height: 60,
-                            width: 60,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 35.0, vertical: 20.0),
-                          child: Image.asset(
-                            'assets/shopee.png',
-                            height: 60,
-                            width: 60,
-                          ),
-                        ),
-                      ],
-                      onPressed: (int index) {
-                        setState(() {
-                          for (int buttonIndex = 0;
-                              buttonIndex < isSelected.length;
-                              buttonIndex++) {
-                            if (buttonIndex == index) {
-                              isSelected[buttonIndex] =
-                                  !isSelected[buttonIndex];
-                            } else {
-                              isSelected[buttonIndex] = false;
-                            }
-                          }
-                        });
-                      },
-                      isSelected: isSelected,
-                    ),
-                  ),
-            SizedBox(
-              height: 100,
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
-              child: ButtonWidget(
-                height: 70,
-                label: 'Submit',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SuccessTransaction()),
-                  );
-                },
-                color: Colors.blue,
-                fontColor: Colors.white,
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
+            child: ButtonWidget(
+              height: 40,
+              label: 'Submit',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SuccessTransaction()),
+                );
+              },
+              color: Colors.blue,
+              fontColor: Colors.white,
+            ),
+          )
+        ],
       ),
     );
   }
