@@ -44,11 +44,12 @@ class _HomePageState extends State<HomePage> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(10)),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 40.0),
                   child: DropdownButton<String>(
+                    dropdownColor: Colors.blue[50],
                     value: selectedValue,
                     onChanged: (newValue) {
                       setState(() {
@@ -59,12 +60,18 @@ class _HomePageState extends State<HomePage> {
                         .map<DropdownMenuItem<String>>(
                             (String value) => DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value),
+                                  child: Text(
+                                    value,
+                                    style: TextStyle(color: Colors.black),
+                                  ),
                                 ))
                         .toList(),
 
                     // add extra sugar..
-                    icon: Icon(Icons.keyboard_arrow_down),
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                    ),
                     iconSize: 20,
                     underline: SizedBox(),
                   ),

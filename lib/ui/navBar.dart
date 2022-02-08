@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weez/ui/history_transaction.dart';
+import 'package:weez/ui/manage_store/manage_store.dart';
 
 class NavBar extends StatelessWidget {
   @override
@@ -55,7 +56,11 @@ class NavBar extends StatelessWidget {
               color: Colors.blue,
             ),
             title: Text('Manage Store'),
-            onTap: () => null,
+            onTap: () =>  Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ManageStorePage()),
+              ),
           ),
           // Divider(),
           // ListTile(

@@ -31,7 +31,7 @@ class _SuccessTransactionState extends State<SuccessTransaction> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 80,
+                          height: 40,
                         ),
                         Container(
                           width: MediaQuery.of(context).size.width,
