@@ -56,17 +56,17 @@ class _EditProductPageState extends State<EditProductPage> {
     Widget continueButton = TextButton(
       child: Text("Continue"),
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductPage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ProductPage()));
       },
     );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-       shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
       title: Text("Caution"),
-      content: Text(
-          "Are you sure you edit this product?"),
+      content: Text("Are you sure you edit this product?"),
       actions: [
         cancelButton,
         continueButton,
@@ -95,17 +95,17 @@ class _EditProductPageState extends State<EditProductPage> {
     Widget continueButton = TextButton(
       child: Text("Continue"),
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductPage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ProductPage()));
       },
     );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-       shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
       title: Text("Caution"),
-      content: Text(
-          "Are you sure you delete this product?"),
+      content: Text("Are you sure you delete this product?"),
       actions: [
         cancelButton,
         continueButton,
@@ -241,16 +241,19 @@ class _EditProductPageState extends State<EditProductPage> {
               SizedBox(
                 height: 15,
               ),
-              ButtonWidget(
-                height: 40,
-                width: MediaQuery.of(context).size.width,
-                label: 'Delete Product',
-                fontSize: 18,
-                onTap: () {
-                  _confirmDelete(context);
-                },
-                color: Colors.red,
-                fontColor: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: ButtonWidget(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width,
+                  label: 'Delete Product',
+                  fontSize: 18,
+                  onTap: () {
+                    _confirmDelete(context);
+                  },
+                  color: Colors.red,
+                  fontColor: Colors.white,
+                ),
               ),
             ],
           ),

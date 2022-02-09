@@ -219,16 +219,19 @@ class _EditEmployeePageState extends State<EditEmployeePage> {
               SizedBox(
                 height: 15,
               ),
-              ButtonWidget(
-                height: 40,
-                width: MediaQuery.of(context).size.width,
-                label: 'Delete Employee',
-                fontSize: 18,
-                onTap: () {
-                  _confirmDelete(context);
-                },
-                color: Colors.red,
-                fontColor: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: ButtonWidget(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width,
+                  label: 'Delete Employee',
+                  fontSize: 18,
+                  onTap: () {
+                    _confirmDelete(context);
+                  },
+                  color: Colors.red,
+                  fontColor: Colors.white,
+                ),
               ),
             ],
           ),

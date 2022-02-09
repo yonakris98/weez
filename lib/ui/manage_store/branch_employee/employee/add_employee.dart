@@ -180,16 +180,19 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
               SizedBox(
                 height: 10,
               ),
-              ButtonWidget(
-                height: 40,
-                width: MediaQuery.of(context).size.width,
-                label: 'Add Employee',
-                fontSize: 18,
-                onTap: () {
-                  _confirmAdd(context);
-                },
-                color: Colors.blue,
-                fontColor: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: ButtonWidget(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width,
+                  label: 'Add Employee',
+                  fontSize: 18,
+                  onTap: () {
+                    _confirmAdd(context);
+                  },
+                  color: Colors.blue,
+                  fontColor: Colors.white,
+                ),
               ),
             ],
           ),

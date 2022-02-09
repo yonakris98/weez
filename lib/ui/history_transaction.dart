@@ -271,40 +271,37 @@ class _HistoryTransactionPageState extends State<HistoryTransactionPage> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              ButtonWidget(
-                label: 'Filter date',
-                color: Colors.blue,
-                icon: Icons.filter_list_outlined,
-                fontSize: 18,
-                fontColor: Colors.white,
-                onTap: () {
-                  _showModalBottom();
-                },
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: 3, //listHistory.length,
-                        itemBuilder: (BuildContext ctxt, int index) {
-                          return historyItem(
-                              index, listHistory[index]["items"].length);
-                        },
-                      )
-                    ],
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                ButtonWidget(
+                  label: 'Filter date',
+                  color: Colors.blue,
+                  icon: Icons.filter_list_outlined,
+                  fontSize: 18,
+                  fontColor: Colors.white,
+                  onTap: () {
+                    _showModalBottom();
+                  },
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: 3, //listHistory.length,
+                    itemBuilder: (BuildContext ctxt, int index) {
+                      return historyItem(
+                          index, listHistory[index]["items"].length);
+                    },
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

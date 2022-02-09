@@ -57,17 +57,17 @@ class _EditBranchPageState extends State<EditBranchPage> {
     Widget continueButton = TextButton(
       child: Text("Continue"),
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductPage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ProductPage()));
       },
     );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-       shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
       title: Text("Caution"),
-      content: Text(
-          "Are you sure you edit this branch?"),
+      content: Text("Are you sure you edit this branch?"),
       actions: [
         cancelButton,
         continueButton,
@@ -96,17 +96,17 @@ class _EditBranchPageState extends State<EditBranchPage> {
     Widget continueButton = TextButton(
       child: Text("Continue"),
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => BranchPage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => BranchPage()));
       },
     );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-       shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
       title: Text("Caution"),
-      content: Text(
-          "Are you sure you delete this branch?"),
+      content: Text("Are you sure you delete this branch?"),
       actions: [
         cancelButton,
         continueButton,
@@ -146,7 +146,7 @@ class _EditBranchPageState extends State<EditBranchPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       _itemField(
+                      _itemField(
                         'Branch',
                         nameController.text,
                       ),
@@ -180,16 +180,19 @@ class _EditBranchPageState extends State<EditBranchPage> {
               SizedBox(
                 height: 15,
               ),
-              ButtonWidget(
-                height: 40,
-                width: MediaQuery.of(context).size.width,
-                label: 'Delete Branch',
-                fontSize: 18,
-                onTap: () {
-                  _confirmDelete(context);
-                },
-                color: Colors.red,
-                fontColor: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: ButtonWidget(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width,
+                  label: 'Delete Branch',
+                  fontSize: 18,
+                  onTap: () {
+                    _confirmDelete(context);
+                  },
+                  color: Colors.red,
+                  fontColor: Colors.white,
+                ),
               ),
             ],
           ),

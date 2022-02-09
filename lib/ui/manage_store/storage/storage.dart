@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weez/ui/manage_store/manage_store.dart';
+import 'package:weez/ui/manage_store/storage/add_storage.dart';
+import 'package:weez/ui/manage_store/storage/edit_storage.dart';
 
 class StoragePage extends StatefulWidget {
   @override
@@ -7,52 +9,33 @@ class StoragePage extends StatefulWidget {
 }
 
 class _StoragePageState extends State<StoragePage> {
-  Widget itemStorage(label, category, price) {
+  Widget itemStorage(label, stock) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: InkWell(
         onTap: () {
-          // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => EditStoragePage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => EditStoragePage()));
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.blue[50], borderRadius: BorderRadius.circular(20)),
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           child: Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Text(
-                        label,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.black),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          category,
-                          style: TextStyle(fontSize: 14, color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              Text(
+                label,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.black),
               ),
               Spacer(),
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: Text(
-                  price,
+                  stock,
                   style: TextStyle(fontSize: 18, color: Colors.black),
                 ),
               ),
@@ -74,8 +57,8 @@ class _StoragePageState extends State<StoragePage> {
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.blue),
-            onPressed: () => Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => ManageStorePage()))),
+            onPressed: () => Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => ManageStorePage()))),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -85,8 +68,8 @@ class _StoragePageState extends State<StoragePage> {
                 color: Colors.blue,
               ),
               onPressed: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => AddStoragePage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddStoragePage()));
               },
             ),
           )
@@ -106,7 +89,7 @@ class _StoragePageState extends State<StoragePage> {
             shrinkWrap: true,
             itemCount: 15,
             itemBuilder: (BuildContext ctxt, int index) {
-              return itemStorage('Ayam Goreng', 'Makanan', 'Rp 100.000');
+              return itemStorage('Telur', '50');
             },
           ),
         ),
