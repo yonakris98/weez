@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weez/ui/history_transaction.dart';
 import 'package:weez/ui/manage_store/manage_store.dart';
+import 'package:weez/helper.dart' as helper;
 
 class NavBar extends StatelessWidget {
   @override
@@ -50,18 +51,19 @@ class NavBar extends StatelessWidget {
               );
             },
           ),
-          ListTile(
-            leading: Icon(
-              Icons.store_mall_directory_rounded,
-              color: Colors.blue,
-            ),
-            title: Text('Manage Store'),
-            onTap: () =>  Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ManageStorePage()),
-              ),
-          ),
+          helper.isAdmin
+              ? ListTile(
+                  leading: Icon(
+                    Icons.store_mall_directory_rounded,
+                    color: Colors.blue,
+                  ),
+                  title: Text('Manage Store'),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ManageStorePage()),
+                  ),
+                )
+              : SizedBox.shrink(),
           // Divider(),
           // ListTile(
           //   leading: Icon(Icons.settings),

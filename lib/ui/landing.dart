@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:weez/ui/login.dart';
+import 'package:weez/ui/register.dart';
+import 'package:weez/ui/welcome.dart';
 
-class WelcomePage extends StatefulWidget {
+class LandingPage extends StatefulWidget {
   @override
-  _WelcomePageState createState() => _WelcomePageState();
+  _LandingPageState createState() => _LandingPageState();
 }
 
-class _WelcomePageState extends State<WelcomePage> {
+class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +23,30 @@ class _WelcomePageState extends State<WelcomePage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 60, 0, 10),
-                  child: Text(
-                    'Welcome to WeezPOS!',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          'assets/logo.png',
+                          height: 50,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left : 10.0),
+                        child: Text(
+                          'WeezPOS',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 24),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 30.0),
                   child: Text(
-                    'Select login as the owner or employee.',
+                    'Select login or create new account first to continue.',
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
@@ -38,7 +54,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   padding: const EdgeInsets.only(bottom: 20.0),
                   child: Center(
                     child: Image.asset(
-                      'assets/login_banner.png',
+                      'assets/landing_banner.jpeg',
                       height: 350,
                     ),
                   ),
@@ -48,7 +64,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LoginPage(title: 'Owner')),
+                          builder: (context) => RegisterPage()),
                     );
                   },
                   child: Container(
@@ -57,23 +73,14 @@ class _WelcomePageState extends State<WelcomePage> {
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     width: MediaQuery.of(context).size.width,
                     height: 70,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 40),
-                          child: Icon(Icons.person, color: Colors.white),
-                        ),
-                        Center(
-                          child: Text(
-                            'Log in as Owner',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          ),
-                        )
-                      ],
+                    child: Center(
+                      child: Text(
+                        'Create new account',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
                     ),
                   ),
                 ),
@@ -85,35 +92,27 @@ class _WelcomePageState extends State<WelcomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LoginPage(title: 'Employee')),
+                          builder: (context) => WelcomePage()),
                     );
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.blue,
+                        border: Border.all(color: Colors.blue),
+                        color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     width: MediaQuery.of(context).size.width,
                     height: 70,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 40),
-                          child: Icon(Icons.group, color: Colors.white),
-                        ),
-                        Center(
-                          child: Text(
-                            'Log in as Employee',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          ),
-                        )
-                      ],
+                    child: Center(
+                      child: Text(
+                        'Log in',
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

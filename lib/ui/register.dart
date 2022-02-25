@@ -1,26 +1,41 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
-import 'package:weez/ui/home.dart';
-import 'package:weez/helper.dart' as helper;
 
-class LoginPage extends StatefulWidget {
-  String title;
-  LoginPage({this.title});
-
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final List<String> listAdmin = ['yona.base@gmail.com'];
 
-  @override
-  void initState() {
-    super.initState();
+  Future _register(context) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
+      if (userCredential != null) {
+        setState(() {
+          Toast.show("Congratulations, your account has been successfully created.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+        });
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+         Toast.show("The password provided is too weak.", context,
+              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      } else if (e.code == 'email-already-in-use') {
+        Toast.show("The account already exists for that email.", context,
+              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -30,71 +45,6 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  Future _signInWithEmailAndPasswordAdmin() async {
-    for (int i = 0; i < listAdmin.length; i++) {
-      if (_emailController.text == listAdmin[i]) {
-        setState(() {
-          helper.isAdmin = true;
-        });
-      }
-    }
-    if (helper.isAdmin == true) {
-      try {
-        UserCredential userCredential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-                email: _emailController.text,
-                password: _passwordController.text);
-        if (userCredential != null) {
-          setState(() {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-          });
-        }
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
-          print('No user found for that email.');
-          Toast.show("No user found for that email.", context,
-              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-        } else if (e.code == 'wrong-password') {
-          print('Wrong password provided for that user.');
-          Toast.show("Wrong password provided for that user.", context,
-              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-        }
-      }
-    } else {
-      Toast.show("Sorry, you are not the Owner.", context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-    }
-  }
-
-  Future _signInWithEmailAndPasswordEmployee() async {
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: _emailController.text, password: _passwordController.text);
-      if (userCredential != null) {
-        setState(() {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-        });
-      }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-        Toast.show("No user found for that email.", context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-        Toast.show("Wrong password provided for that user.", context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.blue),
         title: Text(
-          'Log in as ' + widget.title,
+          'Create new account',
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 24, color: Colors.blue),
         ),
@@ -170,13 +120,9 @@ class _LoginPageState extends State<LoginPage> {
                     height: 50,
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if (_formKey.currentState.validate()) {
-                        if (widget.title == 'Owner') {
-                          _signInWithEmailAndPasswordAdmin();
-                        } else {
-                          _signInWithEmailAndPasswordEmployee();
-                        }
+                        _register(context);
                       }
                     },
                     child: Container(
@@ -187,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 70,
                       child: Center(
                         child: Text(
-                          'Log in',
+                          'Create',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
